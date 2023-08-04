@@ -1,0 +1,74 @@
+<h1>Library</h1>
+
+<h2>Search Book</h2>
+<div>
+    <form (ngSubmit)="searchBook()">
+        <label>Field:</label><br>
+        <input type="text" name="search-book-field" [(ngModel)]="searchField"><br>
+        <label>Value:</label><br>
+        <input type="text" name="search-book-value" [(ngModel)]="searchValue"><br>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div>
+    <button (click)="getBookList()">Refresh List</button>
+</div>
+
+<h2>Book List</h2>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of bookList; let i = index">
+                <td>
+                    <input type="text" name="book-title-edit" value="{{book.title}}" *ngIf="editMode.includes(i); else elseTitle" [(ngModel)]="editBook.title">
+                    <ng-template #elseTitle>{{book.title}}</ng-template>
+                </td>
+                <td>
+                    <input type="text" name="book-author-edit" value="{{book.author}}" *ngIf="editMode.includes(i); else elseAuthor" [(ngModel)]="editBook.author">
+                    <ng-template #elseAuthor>{{book.author}}</ng-template>
+                </td>
+                <td>
+                    <input type="text" name="book-genre-edit" value="{{book.genre}}" *ngIf="editMode.includes(i); else elseGenre" [(ngModel)]="editBook.genre">
+                    <ng-template #elseGenre>{{book.genre}}</ng-template>
+                </td>
+                <td>{{book.available}}</td>
+                <!-- Update Availability -->
+                <button *ngIf="book.available" (click)="updateAvailability(i)">Checkout Book</button>
+                <button *ngIf="!book.available" (click)="updateAvailability(i)">Return Book</button>
+                <button (click)="deleteBook(i)">Delete</button>
+                <!-- Edit/Update -->
+                <button *ngIf="!editMode.includes(i)" (click)="editMode.push(i)">Edit</button>
+                <button *ngIf="editMode.includes(i)" (click)="updateBook(i)">Update</button>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <button (click)=getAvailable()>Get Available Books</button>
+</div>
+
+<h2>Create Book</h2>
+<div>
+    <form (ngSubmit)="createBook()">
+        <label>Title:</label><br>
+        <input type="text" name="create-book-title" [(ngModel)]="newBook.title"><br>
+        <label>Author:</label><br>
+        <input type="text" name="create-book-author" [(ngModel)]="newBook.author"><br>
+        <label>Genre:</label><br>
+        <input type="text" name="create-book-genre" [(ngModel)]="newBook.genre"><br>
+        <button type="submit">Create</button>
+    </form>
+</div>
+
+
+<input type="text" value="{{someValue}}">
