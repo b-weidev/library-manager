@@ -34,11 +34,11 @@
                 </td>
                 <td>
                     <input type="text" name="book-author-edit" value="{{book.author}}" *ngIf="editMode.includes(i); else elseAuthor" [(ngModel)]="editBook.author">
-                    <ng-template #elseAuthor>{{book.author}}</ng-template>
+                    <ng-template data-cy="book-author" #elseAuthor>{{book.author}}</ng-template>
                 </td>
                 <td>
                     <input type="text" name="book-genre-edit" value="{{book.genre}}" *ngIf="editMode.includes(i); else elseGenre" [(ngModel)]="editBook.genre">
-                    <ng-template #elseGenre>{{book.genre}}</ng-template>
+                    <ng-template data-cy="book-genre" #elseGenre>{{book.genre}}</ng-template>
                 </td>
                 <td>{{book.available}}</td>
                 <!-- Update Availability -->
@@ -61,12 +61,12 @@
 <div>
     <form (ngSubmit)="createBook()">
         <label>Title:</label><br>
-        <input type="text" name="create-book-title" [(ngModel)]="newBook.title"><br>
+        <input data-cy="title-input" type="text" name="create-book-title" [(ngModel)]="newBook.title"><br>
         <label>Author:</label><br>
-        <input type="text" name="create-book-author" [(ngModel)]="newBook.author"><br>
+        <input data-cy="author-input" type="text" name="create-book-author" [(ngModel)]="newBook.author"><br>
         <label>Genre:</label><br>
-        <input type="text" name="create-book-genre" [(ngModel)]="newBook.genre"><br>
-        <button type="submit">Create</button>
+        <input data-cy="genre-input" type="text" name="create-book-genre" [(ngModel)]="newBook.genre"><br>
+        <button data-cy="book-create" type="submit">Create</button>
     </form>
 </div>
 
